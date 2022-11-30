@@ -2,7 +2,7 @@ import React from 'react';
 
 
 import App from './App.js';
-import reactDOM from 'react-dom';
+import reactDOM from 'react-dom/client';
 
 import Container from "./context/Container"
 
