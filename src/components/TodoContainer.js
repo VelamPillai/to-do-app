@@ -12,13 +12,13 @@ export default function TodoContainer() {
   console.log('pending tasks:', pendingTasks);
   console.log('done tasks:',doneTasks);
   return (
-    <div>
+    <div className="list">
       <form onSubmit={(e) => { e.preventDefault(); dispatch({ type: 'addItem', payLoad: e.target.task.value }); e.target.reset(); }}>
             <input type="text" name="task" /><button>add task</button>
        </form>
-       
+       <div>
       <h1>TODO List</h1>
-      <ul>
+      <ul className="pending">
         {pendingTasks.map(task => {
          
           return (<li key={task.id}><TodoItem task={task} /></li> )
@@ -30,7 +30,7 @@ export default function TodoContainer() {
       </ul>
 
       <h1>DONE Tasks</h1>
-      <ul>
+        <ul className="done">
       {doneTasks.map(task => {
          
          return (<li key={task.id}><TodoItem task={task} /></li> )
@@ -39,7 +39,8 @@ export default function TodoContainer() {
      
       {/*  <TodoItem task = "breakfast"/> */}   {/* {TodoItem("breakfast")} */}
         {/*  <TodoItem task = "coding" />  */}    {/* {TodoItem("live coding")} */}
-      </ul>
+        </ul>
+        </div>
     </div>
   );
 }
