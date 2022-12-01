@@ -13,7 +13,12 @@ export default function TodoContainer() {
   console.log('done tasks:',doneTasks);
   return (
     <div className="list">
-      <form onSubmit={(e) => { e.preventDefault(); dispatch({ type: 'addItem', payLoad: e.target.task.value }); e.target.reset(); }}>
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        //if input has given
+        e.target.task.value &&
+        dispatch({ type: 'addItem', payLoad: e.target.task.value }); e.target.reset();
+      }}>
             <input type="text" name="task" /><button>add task</button>
        </form>
        <div>
