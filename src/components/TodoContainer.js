@@ -4,25 +4,22 @@ import { MyContext } from "../context/MyContext";
 import TodoItem from "./TodoItem";
 
 export default function TodoContainer() {
-    const { state:{tasks}, dispatch } = useContext(MyContext);
+    const {tasks, updateTask, deleteTask,addTodoTask} =useContext(MyContext)
 
-  const doneTasks =  tasks.filter(item => item.status) 
+    const doneTasks = tasks.filter(item=>item.status)
     const pendingTasks= tasks.filter(item=>!item.status)
     
-  console.log('pending tasks:', pendingTasks);
-  console.log('done tasks:',doneTasks);
   return (
-    <div className="list">
-      <form onSubmit={(e) => { e.preventDefault(); dispatch({ type: 'addItem', payLoad: e.target.task.value }); e.target.reset(); }}>
+    <div>
+       <form onSubmit= {addTodoTask}>
             <input type="text" name="task" /><button>add task</button>
        </form>
-       <div>
+       
       <h1>TODO List</h1>
-      <ul className="pending">
-        {pendingTasks.map(task => {
-         
-          return (<li key={task.id}><TodoItem task={task} /></li> )
-        })} 
+      <ul>
+        {pendingTasks.map(task=>{
+            return( <TodoItem key={task.id} task = {task} updateTask={updateTask} deleteTask={deleteTask}/> )
+        })}
 
        {/*  <TodoItem task = "task 1"/>  */}    {/*  {TodoItem({task: "task 1"})} */}
         {/* <TodoItem task = "task 2"/> */} {/*  {TodoItem("task 2")} */}
@@ -30,17 +27,15 @@ export default function TodoContainer() {
       </ul>
 
       <h1>DONE Tasks</h1>
-        <ul className="done">
-      {doneTasks.map(task => {
-         
-         return (<li key={task.id}><TodoItem task={task} /></li> )
-       })} 
+      <ul>
+      {doneTasks.map(task=>{
+            return( <TodoItem key={task.id} task = {task} updateTask={updateTask} deleteTask={deleteTask}/> )
+        })}
      
      
       {/*  <TodoItem task = "breakfast"/> */}   {/* {TodoItem("breakfast")} */}
         {/*  <TodoItem task = "coding" />  */}    {/* {TodoItem("live coding")} */}
-        </ul>
-        </div>
+      </ul>
     </div>
   );
 }

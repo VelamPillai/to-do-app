@@ -1,18 +1,19 @@
-import React,{useContext} from 'react'
+import React from 'react'
 
-import { MyContext } from '../context/MyContext'
-
-export default function TodoItem({task}) {
-  
-  const { state: { tasks }, dispatch } = useContext(MyContext);
-  
+export default function TodoItem(props) {
   return (
-    
-    <p key={task.id}> {task.text}
-      {task.status === false &&  <button onClick={() => dispatch({ type: "updateItem", payLoad: task.id })}>done</button>}
-        
-          <button onClick={() => dispatch({ type: "deleteItem", payLoad: task.id })}>Delete</button> 
-      </p>
-      
+    <li>{props.task.text}
+      {!props.task.status &&  <button onClick={() => props.updateTask(props.task)}>done</button>}
+     
+      <button onClick={()=>props.deleteTask(props.task)}>Delete</button> 
+          
+      </li>
   )
 }
+
+
+
+
+
+
+
